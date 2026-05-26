@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Aptitudes - Tecnológico de Monterrey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            color: #1a1a1a;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        #container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #003d82 0%, #00274d 100%);
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid #003d82;
+        }
+        
+        .logo-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo-container img {
+            height: 60px;
+            width: auto;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .content {
+            padding: 2rem 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #003d82;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 0.85rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #003d82;
+            box-shadow: 0 0 0 4px rgba(0,61,130,0.1);
+        }
+        
+        button {
+            padding: 0.85rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #003d82 0%, #00274d 100%);
+            color: white;
+            width: 100%;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,61,130,0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,61,130,0.4);
+        }
+        
+        .btn-option {
+            background-color: white;
+            border: 2px solid #e0e0e0;
+            color: #1a1a1a;
+            text-align: left;
+            padding: 1rem;
+            width: 100%;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-option:hover {
+            background-color: #f8f8f8;
+            border-color: #003d82;
+            transform: translateX(4px);
+        }
+        
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #003d82 0%, #00274d 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .question-box {
+            background: linear-gradient(135deg, #f0f4f9 0%, #e8ecf1 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #003d82;
+        }
+        
+        .question-box h2 {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.5;
+            color: #1a1a1a;
+        }
+        
+        .strength-item {
+            margin-bottom: 1.2rem;
+        }
+        
+        .strength-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #003d82;
+        }
+        
+        .strength-bar {
+            width: 100%;
+            height: 7px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .strength-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #003d82 0%, #00274d 100%);
+        }
+        
+        .course-card {
+            background-color: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #003d82;
+        }
+        
+        .course-card:hover {
+            box-shadow: 0 4px 15px rgba(0,61,130,0.15);
+            transform: translateY(-2px);
+        }
+        
+        .course-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #003d82 0%, #00274d 100%);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 0.75rem;
+        }
+        
+        .course-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #003d82;
+        }
+        
+        .course-card p {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+        }
+        
+        .course-type {
+            display: inline-block;
+            font-size: 11px;
+            background: linear-gradient(135deg, #f0f4f9 0%, #e8ecf1 100%);
+            color: #003d82;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            border: 2px solid #e0e0e0;
+            color: #003d82;
+            width: 100%;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #f8f8f8;
+            border-color: #003d82;
+        }
+        
+        .results-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .results-header h1 {
+            color: #003d82;
+            font-size: 26px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, #f0f4f9 0%, #e8ecf1 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #003d82;
+        }
+        
+        .header-section h3 {
+            color: #003d82;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                transform: scaleX(0);
+                transform-origin: 0%;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: scaleX(1);
+                transform-origin: 0%;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="header-content" class="header">
+            <h1>🎓 Tecnológico de Monterrey</h1>
+            <h2 style="font-size: 24px; margin-top: 0.5rem;">Test de Aptitudes</h2>
+            <p>Descubre qué cursos potenciarán tu desarrollo profesional</p>
+        </div>
+        <div id="content" class="content"></div>
+    </div>
+
+    <script>
+        const API_URL = 'https://script.google.com/macros/s/AKfycbzdm0N_SoTDOUR3GduOAUIf5Ut0x4bQm8EqP1xoAQdfFPSJhqd8ZgxDCN-mMvTjiw08/exec';
+        
+        let appState = {
+            screen: 'form',
+            leadData: {},
+            currentQuestion: 0,
+            responses: {},
+            loading: false,
+            loadingScores: null,
+            loadingChallengeCourseId: null
+        };
+
+        const intelligenceExplanations = {
+            'inteligencia_musical': 'Sensibilidad hacia los ritmos, melodías y el tono. Capacidad de apreciar, expresar y conectar emocionalmente con la música. Te atrae vivir experiencias culturales enriquecedoras a través del sonido.',
+            'inteligencia_logica': 'Capacidad para el razonamiento abstracto, resolución de problemas complejos y análisis de datos. Entiendes sistemas, números y relaciones lógicas. Ideal para planificar, gestionar finanzas y tomar decisiones estratégicas.',
+            'inteligencia_espacial': 'Facilidad para visualizar el mundo en 3D, entender diseño y composición visual. Capacidad de orientarte mentalmente y manipular objetos o estructuras en el espacio. Conecta con el arte, la creatividad y la belleza.',
+            'inteligencia_linguistica': 'Habilidad para dominar el lenguaje, comunicarte efectivamente y expresar ideas con claridad. Talento para la escritura, oratoria y persuasión. Te atraen las presentaciones y la comunicación impactante.',
+            'inteligencia_corporal': 'Uso del cuerpo para resolver problemas o expresar ideas. Coordinación, destreza y conciencia corporal. Te expresas a través del movimiento, el ejercicio y las habilidades manuales. Valoras la actividad física y práctica.',
+            'inteligencia_naturalista': 'Sensibilidad para observar y entender la naturaleza, los animales y las plantas. Conexión profunda con el medio ambiente y preocupación por la sostenibilidad. Te interesan la nutrición, ecología y bienestar integral.',
+            'inteligencia_interpersonal': 'Capacidad para empatizar, entender y llevarse bien con otras personas. Talento para la comunicación, colaboración y liderazgo. Eres un buen oyente, motivador y gestor de relaciones. Te atrae generar impacto social.',
+            'inteligencia_intrapersonal': 'Habilidad para comprenderte a ti mismo, autogestionar emociones y reconocer tus fortalezas y debilidades. Autoconocimiento profundo, reflexión personal y claridad de valores. Buscas significado y propósito en tu vida.'
+        };
+        
+        const questions = [
+            { id: 'musical_1', category: 'inteligencia_musical', question: '¿La música me conecta emocionalmente y enriquece mi vida?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            { id: 'musical_2', category: 'inteligencia_musical', question: '¿Disfruto explorando diferentes géneros y estilos musicales?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            
+            { id: 'logica_1', category: 'inteligencia_logica', question: '¿Me atrae resolver problemas complejos y analizar datos financieros?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            { id: 'logica_2', category: 'inteligencia_logica', question: '¿Entiendo con facilidad conceptos de números, presupuestos y planificación?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            
+            { id: 'espacial_1', category: 'inteligencia_espacial', question: '¿Aprecio el arte, el diseño y la belleza visual?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            { id: 'espacial_2', category: 'inteligencia_espacial', question: '¿Tengo facilidad para visualizar y entender estructuras y composiciones?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            
+            { id: 'linguistica_1', category: 'inteligencia_linguistica', question: '¿Disfruto comunicándome claramente y expresando mis ideas oralmente?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            { id: 'linguistica_2', category: 'inteligencia_linguistica', question: '¿Me gusta presentar proyectos e ideas ante otros con confianza?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            
+            { id: 'corporal_1', category: 'inteligencia_corporal', question: '¿Me gusta mantenerme activo y practicar actividades físicas?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            { id: 'corporal_2', category: 'inteligencia_corporal', question: '¿Disfruto de actividades prácticas como cocinar, hacer manualidades o movimiento?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            
+            { id: 'naturalista_1', category: 'inteligencia_naturalista', question: '¿Me interesa la naturaleza, la nutrición y el cuidado del medio ambiente?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            { id: 'naturalista_2', category: 'inteligencia_naturalista', question: '¿Me preocupa llevar una vida sostenible y saludable?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            
+            { id: 'interpersonal_1', category: 'inteligencia_interpersonal', question: '¿Disfruto ayudando, colaborando y trabajando con otras personas?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            { id: 'interpersonal_2', category: 'inteligencia_interpersonal', question: '¿Tengo facilidad para liderar, motivar y generar impacto en la comunidad?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            
+            { id: 'intrapersonal_1', category: 'inteligencia_intrapersonal', question: '¿Me gusta reflexionar sobre mis emociones, valores y propósito de vida?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] },
+            { id: 'intrapersonal_2', category: 'inteligencia_intrapersonal', question: '¿Estoy buscando redefinir mi sentido de propósito en esta etapa?', options: ['Nada', 'Un poco', 'Bastante', 'Mucho'] }
+        ];
+
+        const courses = {
+            1: { 
+                title: 'La Música como Experiencia, Memoria y Sentido',
+                type: 'Bienestar Integral | Presencial | 8 hrs',
+                intelligence: 'inteligencia_musical',
+                desc: 'Explorar cómo la música contribuye al bienestar emocional y a la apreciación estética mediante el análisis de su papel histórico en la inspiración, la sanación y el liderazgo cultural, con el propósito de integrar estas experiencias en tu vida cotidiana y fortalecer tu sentido de propósito en etapas de retiro o madurez.'
+            },
+            2: { 
+                title: 'Cómo Gestionar Herencias y Sucesiones: Planifica tu Legado',
+                type: 'Business | Presencial | 15 hrs',
+                intelligence: 'inteligencia_logica',
+                desc: 'Reconocer cómo planificar y gestionar de manera integral herencias y legados mediante estrategias legales, financieras y familiares que aseguren una transmisión patrimonial justa, ordenada y consciente.'
+            },
+            3: { 
+                title: 'Cómo Gestionar Herencias y Sucesiones (Virtual)',
+                type: 'Business | Aula Virtual | 15 hrs',
+                intelligence: 'inteligencia_logica',
+                desc: 'Reconocer cómo planificar y gestionar de manera integral herencias y legados mediante estrategias legales, financieras y familiares que aseguren una transmisión patrimonial justa, ordenada y consciente.'
+            },
+            4: { 
+                title: 'Presentaciones que Impactan: Dominando PowerPoint y Plataformas',
+                type: 'Comunicación | Aula Virtual | 8 hrs',
+                intelligence: 'inteligencia_linguistica',
+                desc: 'Distinguir los elementos necesarios para diseñar y comunicar ideas de forma visual, clara y profesional, utilizando herramientas digitales que fortalezcan la confianza, la autonomía y la proyección personal en la etapa Silver.'
+            },
+            5: { 
+                title: 'Reinvención Personal Después de la Jubilación',
+                type: 'Bienestar Integral | Presencial | 6 hrs',
+                intelligence: 'inteligencia_intrapersonal',
+                desc: 'Distinguir los desafíos personales, emocionales y sociales asociados a la transición hacia la jubilación mediante reflexiones estructuradas y ejercicios de autoconocimiento, con el fin de resignificar esta etapa y definir un proyecto de vida con propósito, bienestar integral y continuidad de significado personal.'
+            },
+            6: { 
+                title: 'Nutrición para la Longevidad: Comiendo Mejor para Vivir Más',
+                type: 'Salud | Presencial | 6 hrs',
+                intelligence: 'inteligencia_naturalista',
+                desc: 'Conocer los principios de nutrición para la longevidad y los hábitos alimenticios conscientes que favorezcan la vitalidad, la salud metabólica y el bienestar integral en la madurez.'
+            },
+            7: { 
+                title: 'Neurobienestar: Activa tu Mente, Fortalece tu Cuerpo',
+                type: 'Salud | Presencial | 6 hrs',
+                intelligence: 'inteligencia_corporal',
+                desc: 'Fortalecer la salud cognitiva y física mediante estrategias de neurobienestar que promuevan la vitalidad, la memoria y el equilibrio emocional en la madurez.'
+            },
+            8: { 
+                title: 'Sabores y Culturas: Viaja por el Mundo desde tu Cocina',
+                type: 'Humanidades | Aula Virtual | 10 hrs',
+                intelligence: 'inteligencia_naturalista',
+                desc: 'Diseñar y vivir experiencias culinarias seguras y culturalmente significativas para fortalecer el bienestar, la memoria y la convivencia en personas 55+, desde su propia cocina y comunidad.'
+            },
+            9: { 
+                title: 'Confianza Digital: Utiliza Apps y Smartphones sin Miedo',
+                type: 'Transformación Digital | Aula Virtual | 10 hrs',
+                intelligence: 'inteligencia_logica',
+                desc: 'Conocer el uso seguro y funcional de herramientas digitales de la vida cotidiana como redes sociales, aplicaciones y teléfonos inteligentes, para favorecer la autonomía y conexión social.'
+            },
+            10: { 
+                title: 'Consultoría con Causa: Cómo Ser un Consultor con Éxito',
+                type: 'Business | Presencial | 15 hrs',
+                intelligence: 'inteligencia_interpersonal',
+                desc: 'Aprender a estructurar y ofrecer servicios de consultoría con propósito, mediante herramientas y metodologías que permitan integrar y capitalizar la experiencia profesional, para posicionarse efectivamente en el mercado de consultoría independiente.'
+            },
+            11: { 
+                title: 'Historia del Arte: Descubre y Viaja a Través del Tiempo',
+                type: 'Humanidades | Presencial | 10 hrs',
+                intelligence: 'inteligencia_espacial',
+                desc: 'Distinguir las principales etapas de la historia del arte para reconocer su valor cultural, comprender su impacto en la sociedad y disfrutarlo como experiencia de enriquecimiento personal.'
+            },
+            12: { 
+                title: 'Finanzas para una Vida Plena: Planificando tu Jubilación',
+                type: 'Bienestar Integral | Aula Virtual | 15 hrs',
+                intelligence: 'inteligencia_logica',
+                desc: 'Desarrollar una gestión financiera personal práctica y consciente que permita vivir con estabilidad, libertad y propósito durante la madurez y el retiro.'
+            },
+            13: { 
+                title: 'Liderazgo para Filantropía y Voluntariado',
+                type: 'Business | Aula Virtual | 15 hrs',
+                intelligence: 'inteligencia_interpersonal',
+                desc: 'Fortalecer las competencias de liderazgo consciente y social para diseñar y gestionar proyectos de filantropía y voluntariado con propósito, impacto y sostenibilidad.'
+            },
+            14: { 
+                title: 'IA en tu Vida: Cómo Simplificar Tareas y Potenciar Proyectos',
+                type: 'Inteligencia Artificial | Presencial | 10 hrs',
+                intelligence: 'inteligencia_logica',
+                desc: 'Identificar y utilizar herramientas de inteligencia artificial que permitan potenciar actividades cotidianas, mejorar productividad y mantener relevancia social y profesional en un entorno digital.'
+            },
+            15: { 
+                title: 'Emprendiendo con Éxito después de los 50',
+                type: 'Business | Aula Virtual | 15 hrs',
+                intelligence: 'inteligencia_interpersonal',
+                desc: 'Desarrollar habilidades emprendedoras para diseñar y poner en marcha un proyecto personal o social, aprovechando la experiencia y sabiduría adquirida después de los 50.'
+            },
+            16: { 
+                title: 'Despedidas y Recuerdos: Resiliencia y Gestión del Duelo',
+                type: 'Bienestar Integral | Aula Virtual | 8 hrs',
+                intelligence: 'inteligencia_intrapersonal',
+                desc: 'Fortalecer la resiliencia personal y social en personas en etapa madura para gestionar procesos de duelo y despedidas, resignificando recuerdos y construyendo nuevas narrativas de vida.'
+            }
+        };
+
+        function renderForm() {
+            return `
+                <div>
+                    <div style="margin-bottom: 2rem;">
+                        <p style="text-align: center; color: #666; font-size: 14px;">Por favor, completa la siguiente información para personalizar tu análisis</p>
+                    </div>
+                    
+                    <form onsubmit="submitForm(event)">
+                        <div class="form-group">
+                            <label>Nombre completo *</label>
+                            <input type="text" id="nombre" placeholder="Tu nombre" required />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="email" placeholder="tu@email.com" required />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="tel" id="telefono" placeholder="+52 ..." />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Institución u Organización</label>
+                            <input type="text" id="organizacion" placeholder="Opcional" />
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">Comenzar Test</button>
+                    </form>
+                </div>
+            `;
+        }
+
+        function renderQuestion() {
+            const q = questions[appState.currentQuestion];
+            const progress = Math.round(((appState.currentQuestion + 1) / questions.length) * 100);
+            
+            let html = `
+                <div class="progress-container">
+                    <div class="progress-info">
+                        <span>Pregunta ${appState.currentQuestion + 1} de 16</span>
+                        <span>${progress}%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${progress}%;"></div>
+                    </div>
+                </div>
+                
+                <div class="question-box">
+                    <h2>${q.question}</h2>
+                </div>
+                
+                <div style="margin-bottom: 2rem;">
+            `;
+            
+            q.options.forEach((option, idx) => {
+                html += `<button class="btn-option" onclick="selectOption(${idx})">${option}</button>`;
+            });
+            
+            html += `</div>`;
+            
+            if (appState.currentQuestion > 0) {
+                html += `<button class="btn-secondary" onclick="previousQuestion()">← Pregunta Anterior</button>`;
+            }
+            
+            html += `</div>`;
+            return html;
+        }
+
+        function calculateScores() {
+            const scores = {};
+            const categoryMap = {};
+            
+            questions.forEach(q => {
+                if (!categoryMap[q.category]) categoryMap[q.category] = [];
+                categoryMap[q.category].push(q);
+            });
+            
+            Object.keys(categoryMap).forEach(cat => {
+                scores[cat] = 0;
+            });
+            
+            questions.forEach(q => {
+                const value = appState.responses[q.id] || 0;
+                const categoryScore = (value / 3) * 100;
+                scores[q.category] += categoryScore / categoryMap[q.category].length;
+            });
+            
+            return scores;
+        }
+
+        function getRecommendations() {
+            const scores = calculateScores();
+            const courseScores = {};
+            
+            // Mapear cada curso a su inteligencia
+            Object.entries(courses).forEach(([courseId, course]) => {
+                const score = scores[course.intelligence] || 0;
+                courseScores[courseId] = score;
+            });
+            
+            return Object.entries(courseScores)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 3)
+                .map(([id,]) => parseInt(id));
+        }
+
+        function sendToSheet(recommendations, scores, challengeCourseId) {
+            try {
+                const topScore = Object.entries(scores)
+                    .sort(([,a], [,b]) => b - a)[0];
+                
+                const inteligenciaPrincipal = topScore[0].replace(/_/g, ' ').toUpperCase();
+                const cursosRecomendados = recommendations.map(id => courses[id].title).join(' | ');
+                const cursoReto = challengeCourseId ? courses[challengeCourseId].title : 'N/A';
+                
+                const data = {
+                    nombre: appState.leadData.nombre,
+                    email: appState.leadData.email,
+                    telefono: appState.leadData.telefono,
+                    organizacion: appState.leadData.organizacion,
+                    inteligenciaPrincipal: inteligenciaPrincipal,
+                    cursosRecomendados: cursosRecomendados,
+                    cursoReto: cursoReto
+                };
+                
+                console.log('Enviando datos:', data);
+                
+                // Enviar sin esperar (fire and forget)
+                fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(data)
+                }).then(response => {
+                    console.log('Respuesta del servidor:', response.status);
+                }).catch(error => {
+                    console.log('Error al enviar (pero no bloqueamos):', error.message);
+                });
+                
+                return Promise.resolve(true);
+                
+            } catch (error) {
+                console.log('Error en sendToSheet:', error.message);
+                return Promise.resolve(true); // Siempre resuelve
+            }
+        }
+
+        function renderResults() {
+            const recommendations = getRecommendations();
+            const scores = appState.loadingScores || calculateScores();
+            const challengeCourseId = appState.loadingChallengeCourseId;
+            
+            const topDomains = Object.entries(scores)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 3)
+                .map(([k, v]) => ({ domain: k, score: Math.round(v) }));
+            
+            const matchReasons = {
+                1: 'Tu apreciación por la música te permite vivir experiencias emocionales profundas y conectar con tu bienestar integral.',
+                2: 'Tu capacidad lógica es perfecta para estructurar decisiones financieras complejas y proteger el patrimonio familiar.',
+                3: 'Tu pensamiento estratégico te permite planificar herencias de manera ordenada y legal.',
+                4: 'Tu habilidad comunicativa te permite expresar ideas con impacto y confianza profesional.',
+                5: 'Tu autoconocimiento es esencial para reimaginarte con propósito después de la jubilación.',
+                6: 'Tu interés en la naturaleza y sostenibilidad se alinea perfectamente con una nutrición consciente y saludable.',
+                7: 'Tu compromiso con la salud integral te permite fortalecer mente y cuerpo simultáneamente.',
+                8: 'Tu conexión con la naturaleza y las culturas te permite vivir experiencias culinarias enriquecedoras.',
+                9: 'Tu capacidad lógica te permite dominar herramientas digitales de forma segura y funcional.',
+                10: 'Tu talento interpersonal es perfecto para estructurar servicios de consultoría con impacto social.',
+                11: 'Tu capacidad espacial y visual te permite apreciar profundamente la historia del arte.',
+                12: 'Tu razonamiento matemático es esencial para una planificación financiera consciente y efectiva.',
+                13: 'Tu liderazgo interpersonal te permite crear proyectos de filantropía con impacto duradero.',
+                14: 'Tu lógica y pensamiento analítico te permite usar IA de forma estratégica y productiva.',
+                15: 'Tu capacidad emprendedora combinada con tu experiencia te permite crear proyectos viables y significativos.',
+                16: 'Tu introspección y reflexión personal te permite navegar el duelo con sabiduría y resiliencia.'
+            };
+            
+            const challengeReasons = {
+                'inteligencia_musical': 'Aunque la música no es tu fortaleza natural, desarrollarla te abre puertas a experiencias emocionales profundas y sanación que complementan tu vida. La música fortalece áreas del cerebro que mejoran memoria, concentración y bienestar general.',
+                'inteligencia_logica': 'Aunque el pensamiento lógico no es tu punto fuerte, fortalecerlo te dará seguridad en decisiones financieras y planificación, competencias cruciales para tu etapa. La lógica estructura el pensamiento y reduce ansiedad.',
+                'inteligencia_espacial': 'Aunque la visualización espacial no es tu fortaleza, desarrollarla te permite apreciar el mundo con nueva perspectiva y estimula creatividad. Amplía tu comprensión de la belleza y la composición en la vida.',
+                'inteligencia_linguistica': 'Aunque la comunicación verbal no es tu fortaleza natural, desarrollarla te empodera para expresar tus ideas con confianza. Es una habilidad fundamental en cualquier contexto social y profesional.',
+                'inteligencia_corporal': 'Aunque el movimiento no es tu fortaleza principal, desarrollarlo mejora tu salud, energía y conciencia corporal. Es especialmente importante para prevenir pérdida de capacidades en la madurez.',
+                'inteligencia_naturalista': 'Aunque tu conexión con la naturaleza no es lo primordial, fortalecerla te conecta con sostenibilidad y autocuidado. Abre perspectivas sobre cómo vivir en armonía con tu entorno.',
+                'inteligencia_interpersonal': 'Aunque trabajar con otros no es tu zona de confort, desarrollarlo expande tu red, genera impacto y combate aislamiento. Las relaciones significativas son clave para bienestar en la madurez.',
+                'inteligencia_intrapersonal': 'Aunque la reflexión interna no es tu fuerte, desarrollarla te da claridad sobre quién eres y qué te importa. Es la base para decisiones auténticas y vida con propósito.'
+            };
+            
+            let html = `
+                <div class="results-header">
+                    <h1>Tu Perfil de Aptitudes</h1>
+                    <p style="color: #666; font-size: 14px; margin-top: 0.5rem;">Basado en tu evaluación personalizada</p>
+                </div>
+                
+                <div class="header-section">
+                    <h3>Tus Fortalezas Principales</h3>
+            `;
+            
+            topDomains.forEach(d => {
+                const explanation = intelligenceExplanations[d.domain] || '';
+                html += `
+                    <div class="strength-item">
+                        <div class="strength-label">
+                            <span>${d.domain.replace(/_/g, ' ').toUpperCase()}</span>
+                            <span>${d.score}%</span>
+                        </div>
+                        <div class="strength-bar">
+                            <div class="strength-fill" style="width: ${d.score}%;"></div>
+                        </div>
+                        <p style="font-size: 12px; color: #666; margin-top: 0.5rem; font-style: italic;">${explanation}</p>
+                    </div>
+                `;
+            });
+            
+            html += `</div><div style="margin-top: 2rem;"><h3 style="color: #003d82; font-weight: 600; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.5px;">✨ Cursos Recomendados para Ti</h3>`;
+            
+            recommendations.forEach((courseId, idx) => {
+                const course = courses[courseId];
+                const reason = matchReasons[courseId] || 'Curso personalizado para ti.';
+                html += `
+                    <div class="course-card">
+                        <div class="course-number">${idx + 1}</div>
+                        <h4>${course.title}</h4>
+                        <p><strong style="color: #003d82;">¿Por qué es perfecto para ti?</strong> ${reason}</p>
+                        <p style="margin-top: 0.75rem;">${course.desc}</p>
+                        <span class="course-type">${course.type}</span>
+                    </div>
+                `;
+            });
+            
+            if (challengeCourseId && challengeCourseId !== recommendations[0] && challengeCourseId !== recommendations[1] && challengeCourseId !== recommendations[2]) {
+                const challengeCourse = courses[challengeCourseId];
+                const challengeReason = challengeReasons[lowestIntelligence[0]] || 'Desarrolla nuevas competencias.';
+                
+                html += `
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #e0e0e0;">
+                        <h3 style="color: #003d82; font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px;">🚀 Tu Curso Reto: Amplía tus Horizontes</h3>
+                        <p style="color: #666; font-size: 13px; margin-bottom: 1.5rem; font-style: italic;">Este curso te invita a desarrollar una competencia complementaria que fortalecerá tu crecimiento integral.</p>
+                        <div class="course-card" style="border-left-color: #ff9800; background-color: #fff8f0;">
+                            <div class="course-number" style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);">🎯</div>
+                            <h4>${challengeCourse.title}</h4>
+                            <p><strong style="color: #ff9800;">¿Por qué es un reto positivo?</strong> ${challengeReason}</p>
+                            <p style="margin-top: 0.75rem;">${challengeCourse.desc}</p>
+                            <span class="course-type" style="background: linear-gradient(135deg, #ffe0b2 0%, #ffcc80 100%); color: #e65100;">${challengeCourse.type}</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            html += `
+                    </div>
+                    <button class="btn-secondary" onclick="location.reload()">Hacer el test nuevamente</button>
+                </div>
+            `;
+            return html;
+        }
+
+        function submitForm(e) {
+            e.preventDefault();
+            appState.leadData = {
+                nombre: document.getElementById('nombre').value,
+                email: document.getElementById('email').value,
+                telefono: document.getElementById('telefono').value,
+                organizacion: document.getElementById('organizacion').value
+            };
+            appState.screen = 'test';
+            appState.currentQuestion = 0;
+            render();
+        }
+
+        function selectOption(idx) {
+            const q = questions[appState.currentQuestion];
+            appState.responses[q.id] = idx;
+            
+            if (appState.currentQuestion < questions.length - 1) {
+                appState.currentQuestion++;
+                render();
+                window.scrollTo(0, 0);
+            } else {
+                finishTest();
+            }
+        }
+
+        function previousQuestion() {
+            if (appState.currentQuestion > 0) {
+                appState.currentQuestion--;
+                render();
+                window.scrollTo(0, 0);
+            }
+        }
+
+        async function finishTest() {
+            appState.loading = true;
+            render();
+            
+            console.log('finishTest iniciada');
+            
+            try {
+                const recommendations = getRecommendations();
+                const scores = calculateScores();
+                
+                console.log('Recomendaciones:', recommendations);
+                console.log('Scores:', scores);
+                
+                // Encontrar curso reto
+                const lowestIntelligence = Object.entries(scores)
+                    .sort(([,a], [,b]) => a - b)[0];
+                const challengeCourse = Object.entries(courses).find(
+                    ([_, course]) => course.intelligence === lowestIntelligence[0]
+                );
+                const challengeCourseId = challengeCourse ? parseInt(challengeCourse[0]) : null;
+                
+                console.log('Curso reto encontrado:', challengeCourseId);
+                
+                // Enviar a Google Sheet sin esperar (fire and forget con timeout)
+                const sendPromise = Promise.resolve(sendToSheet(recommendations, scores, challengeCourseId))
+                    .catch(err => {
+                        console.log('Error en sendToSheet (continuando):', err);
+                        return false;
+                    });
+                
+                // Establecer un timeout de 3 segundos máximo
+                const timeoutPromise = new Promise((resolve) => {
+                    setTimeout(() => {
+                        console.log('Timeout alcanzado, mostrando resultados');
+                        resolve(true);
+                    }, 3000);
+                });
+                
+                // Esperar a lo que sea más rápido
+                await Promise.race([sendPromise, timeoutPromise]);
+                
+                // SIEMPRE mostrar resultados después de esto
+                appState.screen = 'results';
+                appState.loadingChallengeCourseId = challengeCourseId;
+                appState.loadingScores = scores;
+                console.log('Screen cambiado a results');
+                
+            } catch (error) {
+                console.error('Error en finishTest (pero continuando):', error);
+                appState.screen = 'results';
+            } finally {
+                appState.loading = false;
+                console.log('Loading false, renderizando resultados');
+                render();
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function render() {
+            const content = document.getElementById('content');
+            let html = '';
+            
+            if (appState.loading) {
+                html = `
+                    <div class="loading">
+                        <div style="text-align: center; padding: 3rem;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">⏳</div>
+                            <p style="font-size: 18px; font-weight: 600; color: #003d82; margin-bottom: 0.5rem;">Procesando tu evaluación...</p>
+                            <p style="font-size: 14px; color: #666;">Calculando tu perfil de aptitudes</p>
+                            <div style="margin-top: 2rem; height: 4px; background: #e0e0e0; border-radius: 2px; overflow: hidden;">
+                                <div style="height: 100%; background: linear-gradient(90deg, #003d82 0%, #00274d 100%); animation: shimmer 1.5s infinite;"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (appState.screen === 'form') {
+                html = renderForm();
+            } else if (appState.screen === 'test') {
+                html = renderQuestion();
+            } else if (appState.screen === 'results') {
+                html = renderResults();
+            }
+            
+            content.innerHTML = html;
+        }
+
+        render();
+    </script>
+</body>
+</html>
